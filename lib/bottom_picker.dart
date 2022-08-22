@@ -37,6 +37,7 @@ class BottomPicker extends StatefulWidget {
     this.gradientColors,
     this.iconColor = Colors.white,
     this.selectedItemIndex = 0,
+    this.customButton,
     this.buttonText,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
@@ -77,6 +78,7 @@ class BottomPicker extends StatefulWidget {
     this.initialDateTime,
     this.minDateTime,
     this.maxDateTime,
+    this.customButton,
     this.buttonText,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
@@ -117,6 +119,7 @@ class BottomPicker extends StatefulWidget {
     this.minDateTime,
     this.maxDateTime,
     this.use24hFormat = false,
+    this.customButton,
     this.buttonText,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
@@ -155,6 +158,7 @@ class BottomPicker extends StatefulWidget {
     this.minDateTime,
     this.maxDateTime,
     this.use24hFormat = false,
+    this.customButton,
     this.buttonText,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
@@ -198,7 +202,7 @@ class BottomPicker extends StatefulWidget {
   ///
   ///for date/dateTime/time items parameter is not available
   ///
-  late List<Text>? items;
+  late List<Widget>? items;
 
   ///Nullable function, invoked when navigating between picker items
   ///whether it's date picker or simple item picker it will return a value DateTime or int(index)
@@ -268,6 +272,9 @@ class BottomPicker extends StatefulWidget {
   ///by default it's false (12h format)
   ///
   late bool use24hFormat;
+
+  ///specify a custom button widget instead of the normal one
+  final Widget? customButton;
 
   ///the text that will be applied to the button
   ///if the text is null the button will be rendered with an icon
@@ -455,6 +462,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       textStyle: widget.buttonTextStyle,
                       displayIcon: widget.displayButtonIcon,
                       solidColor: widget.buttonSingleColor,
+                      customButton: widget.customButton,
                     ),
                   ],
                 ),

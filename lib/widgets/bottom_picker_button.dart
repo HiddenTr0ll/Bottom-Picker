@@ -9,6 +9,7 @@ class BottomPickerButton extends StatelessWidget {
   final bool displayIcon;
   final TextStyle? textStyle;
   final Color? solidColor;
+  final Widget? customButton;
 
   BottomPickerButton({
     Key? key,
@@ -19,6 +20,7 @@ class BottomPickerButton extends StatelessWidget {
     this.displayIcon = true,
     this.gradientColors = blueThemeColor,
     this.solidColor,
+    this.customButton,
   }) : super(key: key) {
     if (!displayIcon) {
       assert(text != null);
@@ -31,36 +33,38 @@ class BottomPickerButton extends StatelessWidget {
       onTap: () {
         onClick.call();
       },
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: solidColor,
-          gradient: solidColor == null
-              ? LinearGradient(
-                  colors: gradientColors,
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(1.0, 0.0),
-                  stops: const [0.0, 1.0],
-                  tileMode: TileMode.clamp,
-                )
-              : null,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              if (text != null) Text(text!, style: textStyle),
-              if (displayIcon)
-                Icon(
-                  Icons.done,
-                  color: iconColor,
-                  size: 20,
+      child: customButton == null
+          ? Container(
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: solidColor,
+                gradient: solidColor == null
+                    ? LinearGradient(
+                        colors: gradientColors,
+                        begin: const FractionalOffset(0.0, 0.0),
+                        end: const FractionalOffset(1.0, 0.0),
+                        stops: const [0.0, 1.0],
+                        tileMode: TileMode.clamp,
+                      )
+                    : null,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    if (text != null) Text(text!, style: textStyle),
+                    if (displayIcon)
+                      Icon(
+                        Icons.done,
+                        color: iconColor,
+                        size: 20,
+                      ),
+                  ],
                 ),
-            ],
-          ),
-        ),
-      ),
+              ),
+            )
+          : customButton,
     );
   }
 }
